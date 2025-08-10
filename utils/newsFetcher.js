@@ -12,8 +12,8 @@ async function fetchTableTennisNews() {
         const feed = await parser.parseURL(feedUrl);
 
         const newsList = [];
-        // '탁구' 키워드가 포함된 뉴스를 필터링합니다.
-        const filteredItems = feed.items.filter(item => item.title.includes('김건희'));
+        // '탁구' or 'WTT' 키워드가 포함된 뉴스를 필터링합니다.
+        const filteredItems = feed.items.filter(item => item.title.includes('탁구') || item.title.includes('WTT'));
 
         // 필터링된 뉴스 중 최신 5개를 가져옵니다.
         filteredItems.slice(0, 5).forEach(item => {
