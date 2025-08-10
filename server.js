@@ -10,6 +10,7 @@ const db = require('./config/database');
 const { fetchTableTennisNews } = require('./utils/newsFetcher'); // 뉴스 수집기 불러오기
 
 const app = express();
+// *** 오류 해결: PORT 변수를 한 번만 선언하도록 위치 조정 ***
 const PORT = process.env.PORT || 3000;
 
 // --- 뉴스 캐시 관리 로직 ---
@@ -70,13 +71,7 @@ app.use('/admin', require('./routes/admin'));
 app.use('/news', require('./routes/news'));
 
 
-// 수정 전
-/* app.listen(PORT, () => {
-    console.log(`탁슐랭 서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
-}); */
-
-// 수정 후
-const PORT = process.env.PORT || 3000;
+// 서버 실행
 app.listen(PORT, () => {
-    console.log(`서버가 ${PORT}번 포트에서 실행 중입니다.`);
+    console.log(`탁슐랭 서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
 });
