@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<div class="page-title-section">
+    <h1 class="page-title"><%= post.title %></h1>
+</div>
+
+<div class="content-wrapper container">
+    <div class="post-view-container">
+        <div class="post-header">
+            <div class="post-meta">
+                <span><strong>작성자:</strong> <%= post.author_nickname %></span> |
+                <span><strong>작성일:</strong> <%= new Date(post.createdAt).toLocaleString() %></span>
+            </div>
+        </div>
+        <% if (post.filePath) { %>
+            <div class="post-media">
+                <% if (post.fileType === 'image') { %>
+                    <img src="/uploads/posts/<%= post.filePath %>" alt="첨부 이미지">
+                <% } else { %>
+                    <video src="/uploads/posts/<%= post.filePath %>" controls></video>
+                <% } %>
+            </div>
+        <% } %>
+        <div class="post-content" style="margin-top: 2rem;">
+            <%- post.content.replace(/\n/g, '<br>') %>
+        </div>
+    </div>
+    <div class="btn-group" style="margin-top: 2rem;">
+        <a href="/community/board/<%= post.category %>" class="btn">목록</a>
+        <% if (user && (user.isAdmin || user.id === post.author_id)) { %>
+            <form action="/community/post/delete/<%= post.id %>" method="POST" style="display: inline;">
+                <button type="submit" class="btn btn-delete">삭제</button>
+            </form>
+        <% } %>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,8 @@
+# Dependency directories
+node_modules/
+
+# Database file
+takchelin_pro.db
+
+# Environment variables
+.env
