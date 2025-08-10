@@ -26,7 +26,7 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
-/* Header & Navigation (기존 스타일) */
+/* Header & Navigation */
 .top-header {
     background-color: var(--color-dark-bg);
     padding: 0.5rem 0;
@@ -59,6 +59,7 @@ ul { list-style: none; }
     height: 90px;
 }
 .logo img { height: 60px; }
+.main-nav { display: block; } /* 데스크톱에서는 보이도록 */
 .main-nav > ul { display: flex; gap: 2.5rem; align-items: center; }
 .main-nav > ul > li > a {
     font-size: 1.2rem;
@@ -82,7 +83,11 @@ ul { list-style: none; }
 .dropdown-content a:hover { background-color: var(--color-gold); color: var(--color-dark-bg); }
 .dropdown:hover .dropdown-content { display: block; }
 
-/* Main Hero Section (수정된 부분) */
+/* Mobile Navigation */
+.mobile-menu-icon { display: none; } /* 모바일에서만 보이도록 */
+.mobile-nav { display: none; } /* 모바일에서만 보이도록 */
+
+/* Main Hero Section */
 .main-hero {
     height: 60vh;
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/main_hero.png') no-repeat center center/cover;
@@ -110,7 +115,7 @@ ul { list-style: none; }
     text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* Page Title Section (기존 스타일) */
+/* Page Title Section */
 .page-title-section {
     padding: 3rem 0;
     background-color: var(--color-content-bg);
@@ -123,7 +128,7 @@ ul { list-style: none; }
 }
 .content-wrapper { padding: 3rem 0; }
 
-/* Buttons & Forms (기존 스타일) */
+/* Buttons & Forms */
 .btn {
     display: inline-block;
     padding: 0.7rem 1.8rem;
@@ -160,7 +165,7 @@ ul { list-style: none; }
 .form-group textarea { min-height: 200px; resize: vertical; }
 .btn-group { text-align: right; margin-top: 1.5rem; }
 
-/* Tables (기존 스타일) */
+/* Tables */
 .data-table {
     width: 100%;
     border-collapse: collapse;
@@ -178,7 +183,7 @@ ul { list-style: none; }
 .data-table .col-title { text-align: left; }
 .data-table .col-title a:hover { color: var(--color-gold); text-decoration: underline; }
 
-/* Main Page Grid (기존 스타일) */
+/* Main Page Grid */
 .home-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -186,7 +191,7 @@ ul { list-style: none; }
     margin-bottom: 4rem;
 }
 
-/* News & Schedule Section (기존 스타일) */
+/* News & Schedule Section */
 .news-list li, .schedule-list-main li {
     padding: 0.8rem 0;
     border-bottom: 1px solid var(--color-border);
@@ -202,7 +207,7 @@ ul { list-style: none; }
     margin-right: 1rem;
 }
 
-/* Album & Member List (기존 스타일) */
+/* Album & Member List */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -225,7 +230,7 @@ ul { list-style: none; }
 .grid-item h3 { margin: 1rem 0 0.5rem; font-size: 1.2rem; color: var(--color-gold); }
 .grid-item p { padding: 0 1rem; color: var(--color-text-grey); }
 
-/* Schedule Page (기존 스타일) */
+/* Schedule Page */
 .schedule-list-page .schedule-item {
     background-color: var(--color-content-bg);
     padding: 1.5rem;
@@ -239,3 +244,58 @@ ul { list-style: none; }
 .schedule-list-page .schedule-item h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
 .schedule-list-page .schedule-item p { color: var(--color-text-grey); }
 .schedule-list-page .schedule-item .meta { margin-top: 1rem; font-size: 0.9rem; }
+
+/* --- 반응형 웹 디자인 (모바일) --- */
+@media (max-width: 768px) {
+    .main-nav { display: none; } /* 데스크톱 메뉴 숨기기 */
+    
+    .mobile-menu-icon {
+        display: block;
+        cursor: pointer;
+        padding: 1rem;
+    }
+    .mobile-menu-icon .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: var(--color-text-light);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .mobile-nav {
+        display: none; /* 기본적으로 숨김 */
+        position: absolute;
+        top: 85px;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-content-bg);
+    }
+    .mobile-nav.active { display: block; } /* active 클래스가 붙으면 보임 */
+    .mobile-nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    .mobile-nav li {
+        text-align: center;
+        border-bottom: 1px solid var(--color-border);
+    }
+    .mobile-nav a {
+        display: block;
+        padding: 1.5rem;
+        font-size: 1.2rem;
+    }
+    .mobile-nav .dropdown-content {
+        position: static;
+        display: none;
+        background-color: #111;
+    }
+    .mobile-nav .dropdown:hover .dropdown-content { display: block; }
+
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1.2rem; }
+
+    .home-grid { grid-template-columns: 1fr; }
+    .grid-container { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .album-grid-main { grid-template-columns: 1fr 1fr; }
+}
