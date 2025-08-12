@@ -9,10 +9,10 @@
 :root {
     --color-gold: #E0B841;
     --color-dark-bg: #121212;
-    --color-content-bg: #2a2a2a;
+    --color-content-bg: #1E1E1E;
     --color-text-light: #f0f0f0;
     --color-text-grey: #a0a0a0;
-    --color-border: #444;
+    --color-border: #333;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,7 +59,7 @@ ul { list-style: none; }
     height: 90px;
 }
 .logo img { height: 60px; }
-.main-nav { display: block; } /* 데스크톱에서는 보이도록 */
+.main-nav { display: block; }
 .main-nav > ul { display: flex; gap: 2.5rem; align-items: center; }
 .main-nav > ul > li > a {
     font-size: 1.2rem;
@@ -84,8 +84,8 @@ ul { list-style: none; }
 .dropdown:hover .dropdown-content { display: block; }
 
 /* Mobile Navigation */
-.mobile-menu-icon { display: none; } /* 모바일에서만 보이도록 */
-.mobile-nav { display: none; } /* 모바일에서만 보이도록 */
+.mobile-menu-icon { display: none; }
+.mobile-nav { display: none; }
 
 /* Main Hero Section */
 .main-hero {
@@ -190,6 +190,13 @@ ul { list-style: none; }
     gap: 3rem;
     margin-bottom: 4rem;
 }
+.main-section-title {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--color-gold);
+    margin-bottom: 2.5rem;
+}
 
 /* News & Schedule Section */
 .news-list li, .schedule-list-main li {
@@ -206,11 +213,24 @@ ul { list-style: none; }
     color: var(--color-text-grey);
     margin-right: 1rem;
 }
+.info-box {
+    background-color: var(--color-content-bg);
+    padding: 2rem;
+    border-radius: 8px;
+}
+.info-box h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
 
 /* Album & Member List */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
 }
 .grid-item {
@@ -247,8 +267,7 @@ ul { list-style: none; }
 
 /* --- 반응형 웹 디자인 (모바일) --- */
 @media (max-width: 768px) {
-    .main-nav { display: none; } /* 데스크톱 메뉴 숨기기 */
-    
+    .main-nav { display: none; }
     .mobile-menu-icon {
         display: block;
         cursor: pointer;
@@ -262,16 +281,15 @@ ul { list-style: none; }
         background-color: var(--color-text-light);
         transition: all 0.3s ease-in-out;
     }
-
     .mobile-nav {
-        display: none; /* 기본적으로 숨김 */
+        display: none;
         position: absolute;
         top: 85px;
         left: 0;
         width: 100%;
         background-color: var(--color-content-bg);
     }
-    .mobile-nav.active { display: block; } /* active 클래스가 붙으면 보임 */
+    .mobile-nav.active { display: block; }
     .mobile-nav ul {
         flex-direction: column;
         width: 100%;
@@ -296,6 +314,5 @@ ul { list-style: none; }
     .hero-subtitle { font-size: 1.2rem; }
 
     .home-grid { grid-template-columns: 1fr; }
-    .grid-container { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-    .album-grid-main { grid-template-columns: 1fr 1fr; }
+    .grid-container { grid-template-columns: 1fr 1fr; }
 }

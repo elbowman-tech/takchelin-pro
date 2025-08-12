@@ -8,54 +8,58 @@
 </section>
 
 <div class="content-wrapper container">
-    <!-- 1 & 2. 공지사항 & 자유게시판 -->
-    <div class="home-grid">
-        <section>
-            <h2 class="section-title" style="color: var(--color-gold);">공지사항</h2>
-            <ul class="news-list">
-                <% notices.forEach(post => { %>
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <a href="/community/post/<%= post.id %>" style="flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= post.title %></a>
-                        <span style="color: var(--color-text-grey); flex-shrink: 0; margin-left: 1rem; font-size: 0.9rem;">
-                            <%= post.author_nickname %> | <%= new Date(post.createdAt).toLocaleDateString() %>
-                        </span>
-                    </li>
-                <% }) %>
-            </ul>
-        </section>
-        <section>
-            <h2 class="section-title" style="color: var(--color-gold);">자유게시판</h2>
-            <ul class="news-list">
-                <% freePosts.forEach(post => { %>
-                    <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <a href="/community/post/<%= post.id %>" style="flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= post.title %></a>
-                        <span style="color: var(--color-text-grey); flex-shrink: 0; margin-left: 1rem; font-size: 0.9rem;">
-                            <%= post.author_nickname %> | <%= new Date(post.createdAt).toLocaleDateString() %>
-                        </span>
-                    </li>
-                <% }) %>
-            </ul>
-        </section>
-    </div>
+    <!-- 1. 동호회 소식 -->
+    <section style="margin-bottom: 4rem;">
+        <h2 class="main-section-title">💬 동호회 소식</h2>
+        <div class="home-grid">
+            <div class="info-box">
+                <h3>📢 공지사항</h3>
+                <ul class="news-list">
+                    <% notices.forEach(post => { %>
+                        <li style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="/community/post/<%= post.id %>" style="flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= post.title %></a>
+                            <span style="color: var(--color-text-grey); flex-shrink: 0; margin-left: 1rem; font-size: 0.9rem;">
+                                <%= post.author_nickname %> | <%= new Date(post.createdAt).toLocaleDateString() %>
+                            </span>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>📝 자유게시판</h3>
+                <ul class="news-list">
+                    <% freePosts.forEach(post => { %>
+                        <li style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="/community/post/<%= post.id %>" style="flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= post.title %></a>
+                            <span style="color: var(--color-text-grey); flex-shrink: 0; margin-left: 1rem; font-size: 0.9rem;">
+                                <%= post.author_nickname %> | <%= new Date(post.createdAt).toLocaleDateString() %>
+                            </span>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <!-- 3 & 4. 시합일정 & 탁구뉴스 -->
-    <div class="home-grid">
-        <section>
-            <h2 class="section-title" style="color: var(--color-gold);">시합 일정</h2>
-            <ul class="schedule-list-main">
-                <% schedules.forEach(item => { %>
-                    <li>
-                        <a href="/schedule">
-                           <span class="date">[<%= item.event_date %>]</span>
-                           <span><%= item.title %></span>
-                        </a>
-                    </li>
-                <% }) %>
-            </ul>
-        </section>
-        <section>
-            <h2 class="section-title" style="color: var(--color-gold);">탁구 뉴스</h2>
-            <div class="news-section">
+    <!-- 2. 동호회 일정 및 탁구뉴스 -->
+    <section style="margin-bottom: 4rem;">
+        <h2 class="main-section-title">🏆 시합일정 및 탁구뉴스</h2>
+        <div class="home-grid">
+            <div class="info-box">
+                <h3>📅 시합 일정</h3>
+                <ul class="schedule-list-main">
+                    <% schedules.forEach(item => { %>
+                        <li>
+                            <a href="/schedule">
+                               <span class="date">[<%= item.event_date %>]</span>
+                               <span><%= item.title %></span>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>📰 탁구 뉴스</h3>
                 <ul class="news-list">
                     <% autoNews.forEach(item => { %>
                         <li><a href="<%= item.link %>" target="_blank"><%= item.title %></a></li>
@@ -65,13 +69,13 @@
                     <% }) %>
                 </ul>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <!-- 5. 앨범 -->
+    <!-- 3. 앨범 -->
     <section>
-        <h2 class="section-title" style="text-align: center; color: var(--color-gold);">탁슐랭의 추억</h2>
-        <div class="grid-container" style="grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+        <h2 class="main-section-title">🖼️ 탁슐랭의 추억</h2>
+        <div class="grid-container">
             <% photos.forEach(photo => { %>
                 <a href="/album" class="grid-item">
                     <% if (photo.fileType === 'image') { %>
