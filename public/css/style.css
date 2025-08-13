@@ -243,15 +243,53 @@ ul { list-style: none; }
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     text-align: center;
     padding-bottom: 1rem;
+    cursor: pointer; /* 클릭 가능함을 표시 */
 }
 .grid-item img, .grid-item video {
     width: 100%;
     height: 250px;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
+}
+.grid-item:hover img, .grid-item:hover video {
+    transform: scale(1.05);
 }
 .grid-item h3 { margin: 1rem 0 0.5rem; font-size: 1.2rem; color: var(--color-gold); }
 .grid-item p { padding: 0 1rem; color: var(--color-text-grey); }
+
+/* Lightbox Styles (New) */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+.lightbox-media {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 5px;
+}
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
 
 /* Schedule Page */
 .schedule-list-page .schedule-item {
@@ -270,23 +308,21 @@ ul { list-style: none; }
 
 /* --- 반응형 웹 디자인 (모바일) --- */
 @media (max-width: 768px) {
-    /* *** 오류 해결: 모바일 상단 메뉴 레이아웃 수정 *** */
     .top-header .container {
-        flex-direction: column; /* 세로로 쌓기 */
-        gap: 0.5rem; /* 간격 추가 */
+        flex-direction: column;
+        gap: 0.5rem;
         padding: 0.5rem 0;
     }
     .top-nav ul {
-        flex-wrap: wrap; /* 공간이 부족하면 줄바꿈 */
+        flex-wrap: wrap;
         justify-content: center;
     }
     .search-bar {
-        width: 90%; /* 검색창 너비 조정 */
+        width: 90%;
     }
     .search-bar input {
         width: 100%;
     }
-    /* ****************************************** */
 
     .main-nav { display: none; }
     .mobile-menu-icon {

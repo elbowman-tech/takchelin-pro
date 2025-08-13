@@ -29,14 +29,14 @@
 
     <div class="grid-container">
         <% photos.forEach(photo => { %>
-            <div class="grid-item">
+            <div class="grid-item" onclick="openLightbox('/uploads/album/<%= photo.filePath %>', '<%= photo.fileType %>')">
                 <% if (photo.fileType === 'image') { %>
                     <img src="/uploads/album/<%= photo.filePath %>" alt="<%= photo.caption %>">
                 <% } else { %>
-                    <video src="/uploads/album/<%= photo.filePath %>" controls></video>
+                    <video src="/uploads/album/<%= photo.filePath %>"></video>
                 <% } %>
                 <h3><%= photo.caption %></h3>
-                <p><!--Uploader:--> <%= photo.uploader_nickname %></p>
+                <p>Uploader: <%= photo.uploader_nickname %></p>
                 <% if (user && (user.isAdmin || user.id === photo.uploader_id)) { %>
                     <form action="/album/delete/<%= photo.id %>" method="POST" style="margin-top: 1rem;">
                         <button type="submit" class="btn btn-delete">삭제</button>
@@ -44,6 +44,15 @@
                 <% } %>
             </div>
         <% }) %>
+    </div>
+</div>
+
+<!-- Lightbox HTML (페이지 하단에 추가) -->
+<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content">
+        <img id="lightbox-image" class="lightbox-media" src="" alt="Lightbox Image">
+        <video id="lightbox-video" class="lightbox-media" src="" controls></video>
     </div>
 </div>
 
@@ -56,6 +65,36 @@
             form.style.display = 'none';
         }
     }
+
+    // Lightbox JavaScript
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxVideo = document.getElementById('lightbox-video');
+
+    function openLightbox(filePath, fileType) {
+        if (fileType === 'image') {
+            lightboxImage.src = filePath;
+            lightboxImage.style.display = 'block';
+            lightboxVideo.style.display = 'none';
+        } else {
+            lightboxVideo.src = filePath;
+            lightboxVideo.style.display = 'block';
+            lightboxImage.style.display = 'none';
+        }
+        lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        lightboxImage.src = '';
+        lightboxVideo.src = '';
+        lightboxVideo.pause(); // 비디오 재생 중지
+    }
+
+    // 이벤트 버블링 방지
+    document.querySelector('.lightbox-content').addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
 </script>
 
 <%- include('../partials/footer') %>
