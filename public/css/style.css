@@ -9,10 +9,10 @@
 :root {
     --color-gold: #E0B841;
     --color-dark-bg: #121212;
-    --color-content-bg: #1E1E1E;
+    --color-content-bg: #343030; /* 블럭의 골드 색깔의 밝기 */
     --color-text-light: #f0f0f0;
     --color-text-grey: #a0a0a0;
-    --color-border: #333;
+    --color-border: #444;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -270,6 +270,24 @@ ul { list-style: none; }
 
 /* --- 반응형 웹 디자인 (모바일) --- */
 @media (max-width: 768px) {
+    /* *** 오류 해결: 모바일 상단 메뉴 레이아웃 수정 *** */
+    .top-header .container {
+        flex-direction: column; /* 세로로 쌓기 */
+        gap: 0.5rem; /* 간격 추가 */
+        padding: 0.5rem 0;
+    }
+    .top-nav ul {
+        flex-wrap: wrap; /* 공간이 부족하면 줄바꿈 */
+        justify-content: center;
+    }
+    .search-bar {
+        width: 90%; /* 검색창 너비 조정 */
+    }
+    .search-bar input {
+        width: 100%;
+    }
+    /* ****************************************** */
+
     .main-nav { display: none; }
     .mobile-menu-icon {
         display: block;
@@ -303,7 +321,7 @@ ul { list-style: none; }
     }
     .mobile-nav a {
         display: block;
-        padding: 1.2rem;
+        padding: 0.9rem; /* 모바일 햄버거 아이콘을 눌렀을때 메뉴와 메뉴 사이의 간격 */
         font-size: 1.1rem;
     }
     .mobile-nav .dropdown-content {
